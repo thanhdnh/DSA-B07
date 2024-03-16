@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "DSA-B07/1.0.0": {
+        "runtime": {
+          "DSA-B07.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DSA-B07/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

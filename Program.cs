@@ -161,15 +161,64 @@
     {
       return Sum(Root);
     }
+    public int Product(Node parent){
+      if (parent == null)
+        return 1;
+      else 
+        return parent.Data*Product(parent.LeftNode)*Product(parent.RightNode);
+    }
+    public int Product()
+    {
+      if(Root == null)
+        return 0;
+      return Product(Root);
+    }
+    public void ConvertBST2List(Node parent, List<int> list){
+      if (parent != null)
+      {
+        ConvertBST2List(parent.LeftNode, list);
+        list.Add(parent.Data);
+        ConvertBST2List(parent.RightNode, list);
+      }
+    }
+    public void ConvertBST2List(List<int> list){
+      ConvertBST2List(this.Root, list);
+    }
+    public void PrintPythagoreanTriplets(){
+      List<int> list = new List<int>();
+      ConvertBST2List(list);
+      for(int i = 0; i < list.Count-2; i++)
+        for(int j = i+1; j < list.Count-1; j++)
+          for(int k = j+1; k < list.Count; k++)
+            if(CheckPythagoreanTriplet(list[i], list[j], list[k]))
+              Console.WriteLine($"({list[i]}, {list[j]}, {list[k]})");
+    }
+    public bool CheckPythagoreanTriplet(int a, int b, int c){
+      int max = Math.Max(a, Math.Max(b, c));
+      int min = Math.Min(a, Math.Min(b, c));
+      int cl = a+b+c - max - min;
+      return Math.Pow(max, 2) == Math.Pow(min, 2) + Math.Pow(cl, 2);
+    }
   }
   static void Main()
   {
     Console.Clear();
 
     BinarySearchTree binaryTree = new BinarySearchTree();
-    binaryTree.Insert(23); binaryTree.Insert(16); binaryTree.Insert(45); 
-    binaryTree.Insert(3); binaryTree.Insert(22); binaryTree.Insert(37); 
+    binaryTree.Insert(23); binaryTree.Insert(16); 
+    binaryTree.Insert(45); 
+    binaryTree.Insert(3); binaryTree.Insert(22); 
+    binaryTree.Insert(37); 
     binaryTree.Insert(99);
+    binaryTree.Insert(39); binaryTree.Insert(38); binaryTree.Insert(40);
+    binaryTree.Insert(4); binaryTree.Insert(5);
+
+    /*List<int> list = new List<int>();
+    binaryTree.ConvertBST2List(list);
+    foreach (int item in list)
+      Console.WriteLine(item + ", ");*/
+    binaryTree.PrintPythagoreanTriplets();
+    /*
     Console.WriteLine(">> Max:" + binaryTree.FindMax());  //hoặc dùng binaryTree.FindMax2()   
     Console.WriteLine(">> Min:" + binaryTree.FindMin());  //hoặc dùng binaryTree.FindMin2()
     Node node = binaryTree.Find(5);
@@ -180,14 +229,14 @@
     binaryTree.TraversePreOrder(binaryTree.Root);
     Console.WriteLine("\n>> PostOrder Traversal:"); 
     binaryTree.TraversePostOrder(binaryTree.Root);
-    //System.Console.WriteLine("\n\nAfter removing Nodes 37 and 22:");
-    //binaryTree.Remove(37); binaryTree.Remove(22);
-    //Console.WriteLine("\n>> PreOrder After Removing Operation:");
-    //binaryTree.TraversePreOrder(binaryTree.Root);
-    System.Console.WriteLine("\nSo Node la");
+    System.Console.WriteLine("\n\nAfter removing Nodes 37:");
+    binaryTree.Remove(37); //binaryTree.Remove(22);
+    Console.WriteLine("\n>> PreOrder After Removing Operation:");
+    binaryTree.TraversePreOrder(binaryTree.Root);*/
+    /*System.Console.WriteLine("\nSo Node la");
     System.Console.WriteLine(binaryTree.Count());
     System.Console.WriteLine("\nTong:");
-    System.Console.WriteLine(binaryTree.Sum());
+    System.Console.WriteLine(binaryTree.Sum());*/
     Console.ReadLine();
   }
 }
